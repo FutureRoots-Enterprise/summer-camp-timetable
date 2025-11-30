@@ -3,177 +3,408 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Summer Camp Timetable</title>
+  <title>Tech & Sports Summer Camp 2025</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
+    
     body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: #f9f8ff;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: linear-gradient(135deg, #ede9fe 0%, #e0e7ff 50%, #ede9fe 100%);
       min-height: 100vh;
-      padding: 32px 24px;
+      padding: 40px 24px;
       color: #1e293b;
     }
-    .container { max-width: 1500px; margin: 0 auto; }
+    
+    .container { max-width: 1600px; margin: 0 auto; }
+    
+    /* Header */
     header {
-      margin-bottom: 32px;
-      border-bottom: 1px solid #e2e8f0;
-      padding-bottom: 24px;
+      text-align: center;
+      margin-bottom: 48px;
+      padding: 48px 32px;
+      background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #a855f7 100%);
+      border-radius: 24px;
+      box-shadow: 0 20px 40px rgba(79, 70, 229, 0.3);
+      position: relative;
+      overflow: hidden;
     }
-    h1 {
-      font-size: 1.75rem;
+    
+    header::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    
+    .logo-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.2);
+      backdrop-filter: blur(10px);
+      padding: 8px 16px;
+      border-radius: 50px;
+      font-size: 0.8rem;
       font-weight: 600;
+      color: white;
+      margin-bottom: 16px;
+      letter-spacing: 0.5px;
+    }
+    
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 8px;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+    
+    .subtitle {
+      color: rgba(255,255,255,0.9);
+      font-size: 1.1rem;
+      font-weight: 500;
+    }
+    
+    .header-stats {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      margin-top: 24px;
+      flex-wrap: wrap;
+    }
+    
+    .stat {
+      text-align: center;
+      color: white;
+    }
+    
+    .stat-value {
+      font-size: 1.8rem;
+      font-weight: 700;
+      display: block;
+    }
+    
+    .stat-label {
+      font-size: 0.75rem;
+      opacity: 0.85;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    /* Week sections */
+    .week-section {
+      background: white;
+      border-radius: 20px;
+      padding: 28px;
+      margin-bottom: 32px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+      border: 1px solid rgba(0,0,0,0.04);
+      overflow-x: auto;
+    }
+    
+    .week-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 24px;
+      padding-bottom: 20px;
+      border-bottom: 2px solid #f1f5f9;
+    }
+    
+    .week-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+    }
+    
+    .week1 .week-icon { 
+      background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+      box-shadow: 0 8px 16px rgba(59, 130, 246, 0.3);
+    }
+    
+    .week2 .week-icon { 
+      background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);
+      box-shadow: 0 8px 16px rgba(139, 92, 246, 0.3);
+    }
+    
+    .week-title-group h2 {
+      font-size: 1.25rem;
+      font-weight: 700;
       color: #0f172a;
       margin-bottom: 4px;
     }
-    .subtitle {
+    
+    .week-subtitle {
+      font-size: 0.85rem;
       color: #64748b;
-      font-size: 0.95rem;
+      font-weight: 500;
     }
-    .week-section {
-      background: white;
-      border-radius: 12px;
-      padding: 24px;
-      margin-bottom: 28px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
-      border: 1px solid #e2e8f0;
-      overflow-x: auto;
-    }
-    .week-title {
-      font-size: 1rem;
-      font-weight: 600;
-      margin-bottom: 20px;
-      padding-bottom: 12px;
-      border-bottom: 2px solid #e2e8f0;
-      color: #334155;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
+    
     .week-badge {
-      display: inline-block;
-      padding: 4px 10px;
-      border-radius: 6px;
+      margin-left: auto;
+      padding: 6px 14px;
+      border-radius: 8px;
       font-size: 0.7rem;
-      font-weight: 600;
+      font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
+      letter-spacing: 1px;
     }
-    .week1 .week-badge { background: #dbeafe; color: #1e40af; }
-    .week2 .week-badge { background: #ede9fe; color: #5b21b6; }
+    
+    .week1 .week-badge { 
+      background: #dbeafe; 
+      color: #1e40af; 
+    }
+    
+    .week2 .week-badge { 
+      background: #ede9fe; 
+      color: #5b21b6; 
+    }
+    
+    /* Table styles */
     table {
       width: 100%;
-      border-collapse: collapse;
-      font-size: 0.7rem;
+      border-collapse: separate;
+      border-spacing: 0;
+      font-size: 0.72rem;
     }
+    
     th, td {
-      padding: 10px 6px;
+      padding: 12px 8px;
       text-align: center;
-      border: 1px solid #e2e8f0;
       vertical-align: middle;
     }
+    
     th {
-      background: #f8fafc;
+      background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
       font-weight: 600;
       color: #475569;
-      font-size: 0.7rem;
+      font-size: 0.72rem;
+      border-bottom: 2px solid #e2e8f0;
     }
-    th:first-child { width: 9%; text-align: left; padding-left: 12px; }
+    
+    th:first-child { 
+      text-align: left; 
+      padding-left: 16px;
+      border-radius: 12px 0 0 0;
+    }
+    
+    th:last-child {
+      border-radius: 0 12px 0 0;
+    }
+    
+    td {
+      border-bottom: 1px solid #f1f5f9;
+    }
+    
+    tr:last-child td {
+      border-bottom: none;
+    }
+    
+    tr:last-child td:first-child {
+      border-radius: 0 0 0 12px;
+    }
+    
+    tr:last-child td:last-child {
+      border-radius: 0 0 12px 0;
+    }
+    
     .time-col {
       background: #f8fafc;
-      font-weight: 500;
+      font-weight: 600;
       color: #64748b;
-      font-size: 0.65rem;
+      font-size: 0.68rem;
       text-align: left;
-      padding-left: 12px;
+      padding-left: 16px;
+      white-space: nowrap;
     }
-    .day-header { font-weight: 600; color: #1e293b; display: block; }
-    .day-num { font-weight: 400; color: #94a3b8; font-size: 0.65rem; }
     
-    /* Activity type colors - muted palette */
-    .routine { background: #fefce8; }
-    .meal { background: #fdf4ff; }
-    .academic { background: #eff6ff; }
-    .sports { background: #f0fdf4; }
-    .downtime { background: #f8fafc; }
-    .evening { background: #faf5ff; }
-    .na { background: #f1f5f9; color: #94a3b8; }
+    .day-header { 
+      font-weight: 700; 
+      color: #1e293b; 
+      display: block;
+      font-size: 0.75rem;
+    }
+    
+    .day-num { 
+      font-weight: 500; 
+      color: #94a3b8; 
+      font-size: 0.65rem; 
+      display: block;
+      margin-top: 2px;
+    }
+    
+    /* Activity type colors */
+    .routine { 
+      background: linear-gradient(135deg, #fefce8 0%, #fef9c3 100%); 
+    }
+    
+    .meal { 
+      background: linear-gradient(135deg, #fdf4ff 0%, #fae8ff 100%); 
+    }
+    
+    .academic { 
+      background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); 
+    }
+    
+    .sports { 
+      background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); 
+    }
+    
+    .downtime { 
+      background: #fafafa; 
+      color: #71717a;
+    }
+    
+    .evening { 
+      background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%); 
+    }
+    
+    .na { 
+      background: #f8fafc; 
+      color: #cbd5e1; 
+    }
     
     /* Special events */
     .excursion {
-      background: #fef3c7;
-      border-left: 3px solid #f59e0b;
-    }
-    .excursion-london {
-      background: #fee2e2;
-      border-left: 3px solid #ef4444;
-    }
-    .showcase {
-      background: #d1fae5;
-      border-left: 3px solid #10b981;
-    }
-    .arrival-highlight {
-      background: #d1fae5;
-      border-left: 3px solid #10b981;
-    }
-    .career {
-      background: #ede9fe;
-      border-left: 3px solid #8b5cf6;
-    }
-    .town {
-      background: #ffedd5;
-      border-left: 3px solid #f97316;
-    }
-    .review {
-      background: #fef9c3;
-      border-left: 3px solid #eab308;
-    }
-    .departure {
-      background: #f1f5f9;
-      border-left: 3px solid #64748b;
+      background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+      border-left: 4px solid #f59e0b;
+      position: relative;
     }
     
+    .excursion-london {
+      background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+      border-left: 4px solid #ef4444;
+    }
+    
+    .showcase {
+      background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+      border-left: 4px solid #10b981;
+    }
+    
+    .arrival-highlight {
+      background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+      border-left: 4px solid #10b981;
+    }
+    
+    .career {
+      background: linear-gradient(135deg, #ede9fe 0%, #ddd6fe 100%);
+      border-left: 4px solid #8b5cf6;
+    }
+    
+    .town {
+      background: linear-gradient(135deg, #ffedd5 0%, #fed7aa 100%);
+      border-left: 4px solid #f97316;
+    }
+    
+    .review {
+      background: linear-gradient(135deg, #fef9c3 0%, #fde047 100%);
+      border-left: 4px solid #eab308;
+    }
+    
+    .departure {
+      background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+      border-left: 4px solid #64748b;
+    }
+    
+    /* Activity text */
     .activity-title {
       font-weight: 600;
       color: #1e293b;
-      font-size: 0.68rem;
+      font-size: 0.7rem;
       line-height: 1.3;
       display: block;
-      margin-bottom: 2px;
+      margin-bottom: 3px;
     }
+    
     .activity-sub {
-      font-size: 0.6rem;
+      font-size: 0.62rem;
       color: #64748b;
       display: block;
-      line-height: 1.2;
+      line-height: 1.3;
     }
-    .excursion-text {
-      font-weight: 600;
-      color: #92400e;
-    }
-    .excursion-london .excursion-text {
-      color: #991b1b;
-    }
-    .excursion-details {
+    
+    .excursion-label {
+      display: inline-block;
+      background: rgba(0,0,0,0.1);
+      padding: 3px 8px;
+      border-radius: 4px;
       font-size: 0.58rem;
-      color: #78716c;
-      margin-top: 6px;
-      line-height: 1.4;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
     }
-    .excursion-london .excursion-details {
-      color: #991b1b;
+    
+    .excursion .excursion-label { color: #92400e; }
+    .excursion-london .excursion-label { color: #991b1b; }
+    
+    .excursion-dest {
+      font-size: 1rem;
+      font-weight: 700;
+      display: block;
+      margin-bottom: 6px;
+    }
+    
+    .excursion .excursion-dest { color: #b45309; }
+    .excursion-london .excursion-dest { color: #dc2626; }
+    
+    .excursion-details {
+      font-size: 0.6rem;
+      line-height: 1.5;
+      opacity: 0.8;
+    }
+    
+    .excursion .excursion-details { color: #78716c; }
+    .excursion-london .excursion-details { color: #991b1b; }
+    
+    /* Footer */
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      padding: 24px;
+      color: #94a3b8;
+      font-size: 0.8rem;
+    }
+    
+    footer a {
+      color: #6366f1;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      header { padding: 32px 20px; }
+      h1 { font-size: 1.75rem; }
+      .header-stats { gap: 20px; }
+      .stat-value { font-size: 1.4rem; }
+      .week-section { padding: 16px; }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <header>
-      <h1>Tech & Sports Summer Camp</h1>
-      <p class="subtitle">Loughborough University • 2-Week Residential Programme</p>
-    </header>
+    
 
     <!-- WEEK 1 -->
     <div class="week-section week1">
-      <h2 class="week-title"><span class="week-badge">Week 1</span> Arrival & Cybersecurity — Days 0–7</h2>
+      <div class="week-header">
+        <div class="week-icon">🔐</div>
+        <div class="week-title-group">
+          <h2>Week 1: Arrival & Cybersecurity</h2>
+          <span class="week-subtitle">Cryptography • Web Security • Network Defence • CTF Challenges</span>
+        </div>
+        <span class="week-badge">Days 0–7</span>
+      </div>
       <table>
         <thead>
           <tr>
@@ -216,10 +447,18 @@
             <td class="na">—</td>
             <td><span class="activity-title">Cryptography & Passwords</span></td>
             <td><span class="activity-title">Web Security & Hacking Basics</span></td>
-            <td rowspan="5" class="excursion"><span class="excursion-text">FULL DAY EXCURSION</span><br><br><span class="activity-title">Nottingham</span><span class="excursion-details">Depart ~09:00<br>Return ~17:30<br>Packed Lunch</span></td>
+            <td rowspan="5" class="excursion">
+              <span class="excursion-label">Full Day Excursion</span>
+              <span class="excursion-dest">📍 Nottingham</span>
+              <span class="excursion-details">Depart ~09:00<br>Return ~17:30<br>Packed Lunch</span>
+            </td>
             <td><span class="activity-title">Network Security & Digital Footprint</span></td>
             <td><span class="activity-title">CTF Final Sprint & Portfolio Prep</span></td>
-            <td rowspan="5" class="excursion-london"><span class="excursion-text">FULL DAY EXCURSION</span><br><br><span class="activity-title">London</span><span class="excursion-details">Depart ~09:00<br>Return ~18:30<br>Packed Lunch<br>Late Dinner</span></td>
+            <td rowspan="5" class="excursion-london">
+              <span class="excursion-label">Full Day Excursion</span>
+              <span class="excursion-dest">📍 London</span>
+              <span class="excursion-details">Depart ~09:00<br>Return ~18:30<br>Packed Lunch<br>Late Dinner</span>
+            </td>
             <td class="town"><span class="activity-title">Loughborough Town Centre</span><span class="activity-sub">Shopping, exploring, team bonding</span></td>
           </tr>
           <tr class="meal">
@@ -297,7 +536,14 @@
 
     <!-- WEEK 2 -->
     <div class="week-section week2">
-      <h2 class="week-title"><span class="week-badge">Week 2</span> AI & Technology — Days 8–13</h2>
+      <div class="week-header">
+        <div class="week-icon">🤖</div>
+        <div class="week-title-group">
+          <h2>Week 2: AI & Technology</h2>
+          <span class="week-subtitle">Python • Computer Vision • Predictive Models • Data Science</span>
+        </div>
+        <span class="week-badge">Days 8–13</span>
+      </div>
       <table>
         <thead>
           <tr>
@@ -333,7 +579,11 @@
             <td class="time-col">09:00–13:00</td>
             <td><span class="activity-title">AI Fundamentals & Python Basics</span></td>
             <td><span class="activity-title">Computer Vision & Real-Time AI</span></td>
-            <td rowspan="5" class="excursion"><span class="excursion-text">FULL DAY EXCURSION</span><br><br><span class="activity-title">Manchester</span><span class="excursion-details">Depart ~09:00<br>Return ~17:30<br>Packed Lunch</span></td>
+            <td rowspan="5" class="excursion">
+              <span class="excursion-label">Full Day Excursion</span>
+              <span class="excursion-dest">📍 Manchester</span>
+              <span class="excursion-details">Depart ~09:00<br>Return ~17:30<br>Packed Lunch</span>
+            </td>
             <td><span class="activity-title">Predictive Models & Data Science</span></td>
             <td><span class="activity-title">Final AI Project Sprint</span></td>
             <td rowspan="7" class="departure"><span class="activity-title">Departures</span><span class="activity-sub">All campers depart by 13:00</span></td>
@@ -394,6 +644,8 @@
         </tbody>
       </table>
     </div>
+
+    
   </div>
 </body>
 </html>
