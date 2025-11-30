@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Summer Camp Timetable</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #f9f8ff;
+      min-height: 100vh;
+      padding: 32px 24px;
+      color: #1e293b;
+    }
+    .container { max-width: 1500px; margin: 0 auto; }
+    header {
+      margin-bottom: 32px;
+      border-bottom: 1px solid #e2e8f0;
+      padding-bottom: 24px;
+    }
+    h1 {
+      font-size: 1.75rem;
+      font-weight: 600;
+      color: #0f172a;
+      margin-bottom: 4px;
+    }
+    .subtitle {
+      color: #64748b;
+      font-size: 0.95rem;
+    }
+    .week-section {
+      background: white;
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 28px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+      border: 1px solid #e2e8f0;
+      overflow-x: auto;
+    }
+    .week-title {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid #e2e8f0;
+      color: #334155;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .week-badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .week1 .week-badge { background: #dbeafe; color: #1e40af; }
+    .week2 .week-badge { background: #ede9fe; color: #5b21b6; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.7rem;
+    }
+    th, td {
+      padding: 10px 6px;
+      text-align: center;
+      border: 1px solid #e2e8f0;
+      vertical-align: middle;
+    }
+    th {
+      background: #f8fafc;
+      font-weight: 600;
+      color: #475569;
+      font-size: 0.7rem;
+    }
+    th:first-child { width: 9%; text-align: left; padding-left: 12px; }
+    .time-col {
+      background: #f8fafc;
+      font-weight: 500;
+      color: #64748b;
+      font-size: 0.65rem;
+      text-align: left;
+      padding-left: 12px;
+    }
+    .day-header { font-weight: 600; color: #1e293b; display: block; }
+    .day-num { font-weight: 400; color: #94a3b8; font-size: 0.65rem; }
+    
+    /* Activity type colors - muted palette */
+    .routine { background: #fefce8; }
+    .meal { background: #fdf4ff; }
+    .academic { background: #eff6ff; }
+    .sports { background: #f0fdf4; }
+    .downtime { background: #f8fafc; }
+    .evening { background: #faf5ff; }
+    .na { background: #f1f5f9; color: #94a3b8; }
+    
+    /* Special events */
+    .excursion {
+      background: #fef3c7;
+      border-left: 3px solid #f59e0b;
+    }
+    .excursion-london {
+      background: #fee2e2;
+      border-left: 3px solid #ef4444;
+    }
+    .showcase {
+      background: #d1fae5;
+      border-left: 3px solid #10b981;
+    }
+    .arrival-highlight {
+      background: #d1fae5;
+      border-left: 3px solid #10b981;
+    }
+    .career {
+      background: #ede9fe;
+      border-left: 3px solid #8b5cf6;
+    }
+    .town {
+      background: #ffedd5;
+      border-left: 3px solid #f97316;
+    }
+    .review {
+      background: #fef9c3;
+      border-left: 3px solid #eab308;
+    }
+    .departure {
+      background: #f1f5f9;
+      border-left: 3px solid #64748b;
+    }
+    
+    .activity-title {
+      font-weight: 600;
+      color: #1e293b;
+      font-size: 0.68rem;
+      line-height: 1.3;
+      display: block;
+      margin-bottom: 2px;
+    }
+    .activity-sub {
+      font-size: 0.6rem;
+      color: #64748b;
+      display: block;
+      line-height: 1.2;
+    }
+    .excursion-text {
+      font-weight: 600;
+      color: #92400e;
+    }
+    .excursion-london .excursion-text {
+      color: #991b1b;
+    }
+    .excursion-details {
+      font-size: 0.58rem;
+      color: #78716c;
+      margin-top: 6px;
+      line-height: 1.4;
+    }
+    .excursion-london .excursion-details {
+      color: #991b1b;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Tech & Sports Summer Camp</h1>
+      <p class="subtitle">Loughborough University • 2-Week Residential Programme</p>
+    </header>
+
+    <!-- WEEK 1 -->
+    <div class="week-section week1">
+      <h2 class="week-title"><span class="week-badge">Week 1</span> Arrival & Cybersecurity — Days 0–7</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Time</th>
+            <th><span class="day-header">Sunday</span><span class="day-num">Day 0 · Arrival</span></th>
+            <th><span class="day-header">Monday</span><span class="day-num">Day 1</span></th>
+            <th><span class="day-header">Tuesday</span><span class="day-num">Day 2</span></th>
+            <th><span class="day-header">Wednesday</span><span class="day-num">Day 3</span></th>
+            <th><span class="day-header">Thursday</span><span class="day-num">Day 4</span></th>
+            <th><span class="day-header">Friday</span><span class="day-num">Day 5</span></th>
+            <th><span class="day-header">Saturday</span><span class="day-num">Day 6</span></th>
+            <th><span class="day-header">Sunday</span><span class="day-num">Day 7</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="routine">
+            <td class="time-col">07:00–08:00</td>
+            <td class="na">—</td>
+            <td>Wake Up & Routine</td>
+            <td>Wake Up & Routine</td>
+            <td>Wake Up & Routine</td>
+            <td>Wake Up & Routine</td>
+            <td>Wake Up & Routine</td>
+            <td>Wake Up & Routine</td>
+            <td>Wake Up & Routine</td>
+          </tr>
+          <tr class="meal">
+            <td class="time-col">08:00–08:45</td>
+            <td class="na">—</td>
+            <td>Breakfast</td>
+            <td>Breakfast</td>
+            <td>Breakfast</td>
+            <td>Breakfast</td>
+            <td>Breakfast</td>
+            <td>Breakfast</td>
+            <td>Breakfast</td>
+          </tr>
+          <tr class="academic">
+            <td class="time-col">09:00–13:00</td>
+            <td class="na">—</td>
+            <td><span class="activity-title">Cryptography & Passwords</span></td>
+            <td><span class="activity-title">Web Security & Hacking Basics</span></td>
+            <td rowspan="5" class="excursion"><span class="excursion-text">FULL DAY EXCURSION</span><br><br><span class="activity-title">Nottingham</span><span class="excursion-details">Depart ~09:00<br>Return ~17:30<br>Packed Lunch</span></td>
+            <td><span class="activity-title">Network Security & Digital Footprint</span></td>
+            <td><span class="activity-title">CTF Final Sprint & Portfolio Prep</span></td>
+            <td rowspan="5" class="excursion-london"><span class="excursion-text">FULL DAY EXCURSION</span><br><br><span class="activity-title">London</span><span class="excursion-details">Depart ~09:00<br>Return ~18:30<br>Packed Lunch<br>Late Dinner</span></td>
+            <td class="town"><span class="activity-title">Loughborough Town Centre</span><span class="activity-sub">Shopping, exploring, team bonding</span></td>
+          </tr>
+          <tr class="meal">
+            <td class="time-col">13:15–14:00</td>
+            <td class="na">—</td>
+            <td>Lunch</td>
+            <td>Lunch</td>
+            <td>Lunch</td>
+            <td>Lunch</td>
+            <td>Lunch</td>
+          </tr>
+          <tr class="sports">
+            <td class="time-col">14:00–17:30</td>
+            <td class="arrival-highlight"><span class="activity-title">Arrival & Check-in</span><span class="activity-sub">Elite Athlete Centre<br>14:00–17:00</span></td>
+            <td><span class="activity-title">Sports Training 1</span><span class="activity-sub">Optional Athlete Talk</span></td>
+            <td><span class="activity-title">DigiLabs Technology Day</span></td>
+            <td><span class="activity-title">Sports Training 2</span><span class="activity-sub">Optional Athlete Talk</span></td>
+            <td class="showcase"><span class="activity-title">Cyber Security Showcase</span><span class="activity-sub">Student Presentations</span></td>
+            <td class="review"><span class="activity-title">Goal Setting & Week 1 Review</span><span class="activity-sub">Reflect, set Week 2 goals</span></td>
+          </tr>
+          <tr class="downtime">
+            <td class="time-col">17:00–18:30</td>
+            <td class="arrival-highlight"><span class="activity-title">Campus Orientation Tour</span><span class="activity-sub">Key locations, safety</span></td>
+            <td>Downtime</td>
+            <td>Downtime</td>
+            <td>Downtime</td>
+            <td>Downtime</td>
+            <td><span class="activity-sub">Free Time · Rest & recharge</span></td>
+          </tr>
+          <tr class="meal">
+            <td class="time-col">18:30–19:30</td>
+            <td><span class="activity-title">Welcome Dinner</span></td>
+            <td>Dinner</td>
+            <td>Dinner</td>
+            <td>Dinner</td>
+            <td>Dinner</td>
+            <td>Dinner</td>
+          </tr>
+          <tr class="evening">
+            <td class="time-col">19:45–21:00</td>
+            <td><span class="activity-title">Icebreakers</span><span class="activity-sub">Name games, teams, rules</span></td>
+            <td><span class="activity-title">Quiz Night #1</span></td>
+            <td><span class="activity-title">Scavenger Hunt</span></td>
+            <td><span class="activity-title">Cinema Night #1</span></td>
+            <td><span class="activity-title">Debate Night</span></td>
+            <td><span class="activity-title">Karaoke Night</span></td>
+            <td class="downtime"><span class="activity-sub">Free Time · Rest after excursion</span></td>
+            <td class="career"><span class="activity-title">Career Focus Session</span><span class="activity-sub">AI, Game Dev, Sports Tech</span></td>
+          </tr>
+          <tr class="downtime">
+            <td class="time-col">21:00–22:00</td>
+            <td><span class="activity-sub">Settle In · Unpack, socialize</span></td>
+            <td>Downtime</td>
+            <td>Downtime</td>
+            <td>Downtime</td>
+            <td>Downtime</td>
+            <td>Downtime</td>
+            <td>Downtime</td>
+            <td>Downtime</td>
+          </tr>
+          <tr class="routine">
+            <td class="time-col">22:00</td>
+            <td>Lights Out</td>
+            <td>Lights Out</td>
+            <td>Lights Out</td>
+            <td>Lights Out</td>
+            <td>Lights Out</td>
+            <td>Lights Out</td>
+            <td>Lights Out</td>
+            <td>Lights Out</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- WEEK 2 -->
+    <div class="week-section week2">
+      <h2 class="week-title"><span class="week-badge">Week 2</span> AI & Technology — Days 8–13</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Time</th>
+            <th><span class="day-header">Monday</span><span class="day-num">Day 8</span></th>
+            <th><span class="day-header">Tuesday</span><span class="day-num">Day 9</span></th>
+            <th><span class="day-header">Wednesday</span><span class="day-num">Day 10</span></th>
+            <th><span class="day-header">Thursday</span><span class="day-num">Day 11</span></th>
+            <th><span class="day-header">Friday</span><span class="day-num">Day 12</span></th>
+            <th><span class="day-header">Saturday</span><span class="day-num">Day 13 · Departure</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="routine">
+            <td class="time-col">07:00–08:00</td>
+            <td>Wake Up & Routine</td>
+            <td>Wake Up & Routine</td>
+            <td>Wake Up & Routine</td>
+            <td>Wake Up & Routine</td>
+            <td>Wake Up & Routine</td>
+            <td>Wake Up & Routine</td>
+          </tr>
+          <tr class="meal">
+            <td class="time-col">08:00–08:45</td>
+            <td>Breakfast</td>
+            <td>Breakfast</td>
+            <td>Breakfast</td>
+            <td>Breakfast</td>
+            <td>Breakfast</td>
+            <td>Breakfast</td>
+          </tr>
+          <tr class="academic">
+            <td class="time-col">09:00–13:00</td>
+            <td><span class="activity-title">AI Fundamentals & Python Basics</span></td>
+            <td><span class="activity-title">Computer Vision & Real-Time AI</span></td>
+            <td rowspan="5" class="excursion"><span class="excursion-text">FULL DAY EXCURSION</span><br><br><span class="activity-title">Manchester</span><span class="excursion-details">Depart ~09:00<br>Return ~17:30<br>Packed Lunch</span></td>
+            <td><span class="activity-title">Predictive Models & Data Science</span></td>
+            <td><span class="activity-title">Final AI Project Sprint</span></td>
+            <td rowspan="7" class="departure"><span class="activity-title">Departures</span><span class="activity-sub">All campers depart by 13:00</span></td>
+          </tr>
+          <tr class="meal">
+            <td class="time-col">13:15–14:00</td>
+            <td>Lunch</td>
+            <td>Lunch</td>
+            <td>Lunch</td>
+            <td>Lunch</td>
+          </tr>
+          <tr class="sports">
+            <td class="time-col">14:30–17:30</td>
+            <td><span class="activity-title">Sports Training 4</span><span class="activity-sub">Optional Athlete Talk</span></td>
+            <td><span class="activity-title">Sports Training 5</span><span class="activity-sub">Optional Athlete Talk</span></td>
+            <td><span class="activity-title">Sports Science Day</span><span class="activity-sub">+ Ben Ahern Lecture</span></td>
+            <td class="showcase"><span class="activity-title">Project Completion & Presentations</span></td>
+          </tr>
+          <tr class="downtime">
+            <td class="time-col">17:30–18:30</td>
+            <td>Downtime</td>
+            <td>Downtime</td>
+            <td>Downtime</td>
+            <td>Downtime</td>
+          </tr>
+          <tr class="meal">
+            <td class="time-col">18:30–19:30</td>
+            <td>Dinner</td>
+            <td>Dinner</td>
+            <td>Dinner</td>
+            <td>Dinner</td>
+          </tr>
+          <tr class="evening">
+            <td class="time-col">19:45–21:00</td>
+            <td><span class="activity-title">Arts & Crafts</span><span class="activity-sub">Olympics Shirts</span></td>
+            <td><span class="activity-title">Talent Show</span></td>
+            <td><span class="activity-title">Cinema Night #2</span></td>
+            <td><span class="activity-title">Mini Olympics</span></td>
+            <td><span class="activity-title">Graduation & Disco</span></td>
+          </tr>
+          <tr class="downtime">
+            <td class="time-col">21:00–22:00</td>
+            <td>Downtime</td>
+            <td>Downtime</td>
+            <td>Downtime</td>
+            <td>Downtime</td>
+            <td>Downtime & Packing</td>
+          </tr>
+          <tr class="routine">
+            <td class="time-col">22:00</td>
+            <td>Lights Out</td>
+            <td>Lights Out</td>
+            <td>Lights Out</td>
+            <td>Lights Out</td>
+            <td>Lights Out</td>
+            <td class="na">—</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+</html>
